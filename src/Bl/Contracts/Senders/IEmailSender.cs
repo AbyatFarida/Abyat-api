@@ -1,0 +1,6 @@
+﻿namespace Abyat.Bl.Contracts.Senders;
+
+public interface IEmailSender
+{
+    Task SendAsync(string email, string subject, string message);
+}
