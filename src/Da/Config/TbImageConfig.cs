@@ -12,7 +12,7 @@ public class TbImageConfig : IEntityTypeConfiguration<TbImage>
             .IsUnique();
 
         builder.Property(e => e.Slug)
-            .HasMaxLength(2000);
+            .HasMaxLength(191);
 
         builder.Property(e => e.Url)
             .HasMaxLength(2000);
