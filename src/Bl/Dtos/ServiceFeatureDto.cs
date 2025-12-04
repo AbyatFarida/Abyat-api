@@ -4,8 +4,8 @@ namespace Abyat.Bl.Dtos;
 
 public class ServiceFeatureDto : BaseDto
 {
-    public int ServiceId { get; set; }
+    public Guid ServiceId { get; set; }
 
-    public int FeatureId { get; set; }
+    public Guid FeatureId { get; set; }
 
 }

@@ -2,9 +2,9 @@
 
 public class TbProductImage : BaseTable
 {
-    public int ProductId { get; set; }
+    public Guid ProductId { get; set; }
 
-    public int ImageSizeId { get; set; }
+    public Guid ImageSizeId { get; set; }
 
     #region Navigation Properties
 

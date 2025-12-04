@@ -26,28 +26,28 @@ public class ServiceService(
     : BaseService<TbService, ServiceDto>(uow, repoQry, mapper, userServiceQry, publisher),
     IService
 {
-    public async Task<(bool success, int id)> AddAsync(
+    public async Task<(bool success, Guid id)> AddAsync(
         ServiceDto entity,
-        List<int> featuresIds,
-        List<int> productsIds,
-        IEnumerable<int>? imageSizeIds = null,
+        List<Guid> featuresIds,
+        List<Guid> productsIds,
+        IEnumerable<Guid>? imageSizeIds = null,
         bool fireEvent = true)
     {
         bool success = false;
-        int id = -1;
+        Guid id = new Guid();
 
         try
         {
             await uow.BeginTransactionAsync();
 
-            (bool success, int id) add = await AddAsync(entity, fireEvent);
+            (bool success, Guid id) add = await AddAsync(entity, fireEvent);
 
             success = add.success;
             id = add.id;
 
             if (imageSizeIds is not null && imageSizeIds.Any())
             {
-                foreach (int imageSizeId in imageSizeIds)
+                foreach (var imageSizeId in imageSizeIds)
                 {
                     if (await serviceImage.IsExistsAsync(p => p.ServiceId == add.id && p.ImageSizeId == imageSizeId))
                         continue;
@@ -61,11 +61,11 @@ public class ServiceService(
             }
 
             if (!success)
-                return (false, -1);
+                return (false, new Guid());
 
             if (featuresIds.Count > 0)
             {
-                foreach (int featureId in featuresIds)
+                foreach (var featureId in featuresIds)
                 {
                     FeatureDto? feature = await featureService.GetByIdAsync(featureId);
                     var featureAdd = await serviceFeatureService.AddAsync(new ServiceFeatureDto()
@@ -80,7 +80,7 @@ public class ServiceService(
 
             if (productsIds.Count > 0)
             {
-                foreach (int productId in productsIds)
+                foreach (var productId in productsIds)
                 {
                     ProductDto? product = await productService.GetByIdAsync(productId);
                     var productAdd = await serviceProductService.AddAsync(new ServiceProductDto()
@@ -104,9 +104,9 @@ public class ServiceService(
 
     public async Task<bool> UpdateAsync(
         ServiceDto entity,
-        List<int> featuresIds,
-        List<int> productsIds,
-        IEnumerable<int>? imageSizeIds = null,
+        List<Guid> featuresIds,
+        List<Guid> productsIds,
+        IEnumerable<Guid>? imageSizeIds = null,
         bool fireEvent = true)
     {
         bool updateSuccess = await UpdateAsync(entity, fireEvent);
@@ -115,7 +115,7 @@ public class ServiceService(
 
         if (imageSizeIds is not null && imageSizeIds.Any())
         {
-            foreach (int imgSizeId in imageSizeIds)
+            foreach (var imgSizeId in imageSizeIds)
             {
                 if (await serviceImage.IsExistsAsync(p => p.ServiceId == entity.Id && p.ImageSizeId == imgSizeId))
                     continue;
@@ -131,14 +131,14 @@ public class ServiceService(
         #region Lists Comparison Logic
 
         List<ServiceFeatureDto>? existingFeatures = await serviceFeatureService.GetByServiceIdAsync(entity.Id);
-        List<int>? existingFeatureIds = existingFeatures.Select(f => f.FeatureId).ToList();
-        List<int>? featuresToAdd = featuresIds.Except(existingFeatureIds).ToList();
-        List<int>? featuresToRemove = existingFeatureIds.Except(featuresIds).ToList();
+        List<Guid>? existingFeatureIds = existingFeatures.Select(f => f.FeatureId).ToList();
+        List<Guid>? featuresToAdd = featuresIds.Except(existingFeatureIds).ToList();
+        List<Guid>? featuresToRemove = existingFeatureIds.Except(featuresIds).ToList();
 
         List<ServiceProductDto>? existingProducts = await serviceProductService.GetByServiceIdAsync(entity.Id);
-        List<int>? existingProductIds = existingProducts.Select(p => p.ProductId).ToList();
-        List<int>? productsToAdd = productsIds.Except(existingProductIds).ToList();
-        List<int>? productsToRemove = existingProductIds.Except(productsIds).ToList();
+        List<Guid>? existingProductIds = existingProducts.Select(p => p.ProductId).ToList();
+        List<Guid>? productsToAdd = productsIds.Except(existingProductIds).ToList();
+        List<Guid>? productsToRemove = existingProductIds.Except(productsIds).ToList();
 
         #endregion
 
@@ -199,7 +199,7 @@ public class ServiceService(
         }
     }
 
-    public async Task<ImageDto>? GetFirstMedImg(int id)
+    public async Task<ImageDto>? GetFirstMedImg(Guid id)
     {
         if (!await HasImgs(id))
             return null;
@@ -212,9 +212,9 @@ public class ServiceService(
             return images.FirstOrDefault().MediumSize;
     }
 
-    public async Task<bool> HasImgs(int id) => await serviceImage.IsExistsAsync(p => p.ServiceId == id);
+    public async Task<bool> HasImgs(Guid id) => await serviceImage.IsExistsAsync(p => p.ServiceId == id);
 
-    public async Task<List<ImageSizeDto>> GetImgsAsync(int Id)
+    public async Task<List<ImageSizeDto>> GetImgsAsync(Guid Id)
     {
         return await serviceImage.GetServiceImgsAsync(Id);
     }

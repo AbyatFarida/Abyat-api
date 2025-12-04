@@ -2,15 +2,15 @@
 
 public abstract class BaseTable
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
 
     public enCurrentState CurrentState { get; set; } = enCurrentState.Active;
 
     public DateTimeOffset CreatedAt { get; set; }
 
-    public int CreatedBy { get; set; }
+    public Guid CreatedBy { get; set; }
 
     public DateTimeOffset? UpdatedAt { get; set; }
 
-    public int? UpdatedBy { get; set; }
+    public Guid? UpdatedBy { get; set; }
 }

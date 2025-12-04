@@ -2,9 +2,9 @@
 
 public class TbServiceImage : BaseTable
 {
-    public int ServiceId { get; set; }
+    public Guid ServiceId { get; set; }
 
-    public int ImageSizeId { get; set; }
+    public Guid ImageSizeId { get; set; }
 
     #region Navigation Properties
 

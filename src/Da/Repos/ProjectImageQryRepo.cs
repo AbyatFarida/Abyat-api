@@ -15,7 +15,7 @@ public class ProjectImageQryRepo(
     : TableQryRepoWithFactory<TbProjectImage>(contextFactory, logger),
     IProjectImageQryRepo
 {
-    public async Task<List<TbProjectImage>> FindByProjectIdAsync(int projectId, CancellationToken cancellationToken)
+    public async Task<List<TbProjectImage>> FindByProjectIdAsync(Guid projectId, CancellationToken cancellationToken)
     {
         try
         {

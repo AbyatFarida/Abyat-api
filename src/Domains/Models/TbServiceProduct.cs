@@ -2,9 +2,9 @@
 
 public class TbServiceProduct : BaseTable
 {
-    public int ServiceId { get; set; }
+    public Guid ServiceId { get; set; }
 
-    public int ProductId { get; set; }
+    public Guid ProductId { get; set; }
 
     #region Navigation Props
 

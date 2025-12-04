@@ -15,7 +15,7 @@ public class TestimonialImageQryRepo(
     : TableQryRepoWithFactory<TbTestimonialImage>(contextFactory, logger),
     ITestimonialImageQryRepo
 {
-    public async Task<List<TbTestimonialImage>> FindByTestimonialIdAsync(int testimonialId, CancellationToken cancellationToken)
+    public async Task<List<TbTestimonialImage>> FindByTestimonialIdAsync(Guid testimonialId, CancellationToken cancellationToken)
     {
         try
         {

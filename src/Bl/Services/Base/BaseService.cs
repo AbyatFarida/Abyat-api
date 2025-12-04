@@ -50,9 +50,9 @@ public abstract class BaseService<Tb, Dto> : IBaseService<Tb, Dto> where Tb : Ba
 
     public async virtual Task<List<Dto>> GetAllAsync() => _mapper.Map<List<Tb>, List<Dto>>(await _repoQuery.GetAllAsync());
 
-    public async virtual Task<Dto> GetByIdAsync(int id) => _mapper.Map<Tb, Dto>(await _repoQuery.FindAsync(id));
+    public async virtual Task<Dto> GetByIdAsync(Guid id) => _mapper.Map<Tb, Dto>(await _repoQuery.FindAsync(id));
 
-    public async virtual Task<(bool success, int id)> AddAsync(Dto entity, bool fireEvent = true)
+    public async virtual Task<(bool success, Guid id)> AddAsync(Dto entity, bool fireEvent = true)
     {
         var dbObject = _mapper.Map<Dto, Tb>(entity);
         var UserId = _userServiceQuery.GetLoggedInUserId();
@@ -87,7 +87,7 @@ public abstract class BaseService<Tb, Dto> : IBaseService<Tb, Dto> where Tb : Ba
         return result;
     }
 
-    private async Task<bool> ChangeStatusAsync(int id, enCurrentState status = enCurrentState.Active, bool fireEvent = true)
+    private async Task<bool> ChangeStatusAsync(Guid id, enCurrentState status = enCurrentState.Active, bool fireEvent = true)
     {
         Tb? entity = await _repoQuery.FindAsync(id);
 
@@ -96,7 +96,7 @@ public abstract class BaseService<Tb, Dto> : IBaseService<Tb, Dto> where Tb : Ba
         enCurrentState previousState = entity.CurrentState;
 
         entity.CurrentState = status;
-        int userId = _userServiceQuery.GetLoggedInUserId();
+        var userId = _userServiceQuery.GetLoggedInUserId();
         entity.UpdatedBy = userId;
 
         bool success = await _repoCommand.UpdateAsync(entity);
@@ -108,11 +108,11 @@ public abstract class BaseService<Tb, Dto> : IBaseService<Tb, Dto> where Tb : Ba
         return success;
     }
 
-    public async virtual Task<bool> ActivateAsync(int id, bool fireEvent = true) => await ChangeStatusAsync(id, enCurrentState.Active, fireEvent);
+    public async virtual Task<bool> ActivateAsync(Guid id, bool fireEvent = true) => await ChangeStatusAsync(id, enCurrentState.Active, fireEvent);
 
-    public async virtual Task<bool> DeactivateAsync(int id, bool fireEvent = true) => await ChangeStatusAsync(id, enCurrentState.InActive, fireEvent);
+    public async virtual Task<bool> DeactivateAsync(Guid id, bool fireEvent = true) => await ChangeStatusAsync(id, enCurrentState.InActive, fireEvent);
 
-    public async virtual Task<bool> DeleteAsync(int id, enDeleteType deleteType = enDeleteType.HardDelete, bool fireEvent = true)
+    public async virtual Task<bool> DeleteAsync(Guid id, enDeleteType deleteType = enDeleteType.HardDelete, bool fireEvent = true)
     {
         if (deleteType == enDeleteType.SoftDelete)
         {
@@ -128,6 +128,6 @@ public abstract class BaseService<Tb, Dto> : IBaseService<Tb, Dto> where Tb : Ba
 
     public async virtual Task<bool> IsExistsAsync(Expression<Func<Tb, bool>> filter, CancellationToken cancellationToken) => await _repoQuery.IsExistsAsync(filter, cancellationToken);
 
-    public async virtual Task<bool> IsExistsAsync(int Id, CancellationToken cancellationToken) => await _repoQuery.IsExistsAsync(Id, cancellationToken);
+    public async virtual Task<bool> IsExistsAsync(Guid Id, CancellationToken cancellationToken) => await _repoQuery.IsExistsAsync(Id, cancellationToken);
 
 }

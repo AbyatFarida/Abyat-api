@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.WebUtilities;
 using System.Text;
 
-namespace Abyat.Api.Services.General;
+namespace Abyat.Api.Services;
 
 public class UserCmdService(
     Bl.Contracts.Senders.IEmailSender emailSender,

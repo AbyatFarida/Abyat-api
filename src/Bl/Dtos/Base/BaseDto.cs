@@ -4,7 +4,7 @@ namespace Abyat.Bl.Dtos.Base;
 
 public abstract class BaseDto
 {
-    public int Id { get; set; } = 0;
+    public Guid Id { get; set; } = new Guid();
 
     public enCurrentState CurrentState { get; set; } = enCurrentState.Deleted;
 

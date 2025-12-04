@@ -24,7 +24,7 @@ public class AuditLogDto : BaseDto
     /// Gets or sets the unique identifier of the affected entity.
     /// </summary>
     /// <example>"3fa85f64-5717-4562-b3fc-2c963f66afa6"</example>
-    public int? EntityId { get; set; }
+    public Guid? EntityId { get; set; }
 
     /// <summary>
     /// Gets or sets additional details about the audit event.

@@ -6,7 +6,7 @@ public partial class TbAuditLog : BaseTable
 
     public string? Entity { get; set; }
 
-    public int? EntityId { get; set; }
+    public Guid? EntityId { get; set; }
 
     public string? Details { get; set; }
 

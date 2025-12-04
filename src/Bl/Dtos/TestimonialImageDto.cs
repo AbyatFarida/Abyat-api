@@ -4,8 +4,8 @@ namespace Abyat.Bl.Dtos;
 
 public class TestimonialImageDto : BaseDto
 {
-    public int TestimonialId { get; set; }
+    public Guid TestimonialId { get; set; }
 
-    public int ImageSizeId { get; set; }
+    public Guid ImageSizeId { get; set; }
 
 }

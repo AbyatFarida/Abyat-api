@@ -3,6 +3,7 @@ using Abyat.Da.Exceptions;
 using Abyat.Domains.Contracts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using System.Linq.Expressions;
 using static Abyat.Core.Enums.Status.Status;
 
 namespace Abyat.Da.Repos.Base;
@@ -18,7 +19,7 @@ public class TableCmdRepo<Tb>(
 
     #region Add Methods
 
-    public virtual async Task<(bool success, int newId)> AddAsync(Tb entity, CancellationToken cancellationToken = default)
+    public virtual async Task<(bool success, Guid newId)> AddAsync(Tb entity, CancellationToken cancellationToken = default)
     {
         const string methodName = nameof(AddAsync);
 
@@ -30,7 +31,7 @@ public class TableCmdRepo<Tb>(
 
         try
         {
-            entity.Id = 0;
+            entity.Id = new Guid();
             entity.CreatedAt = DateTime.UtcNow;
             await dbSet.AddAsync(entity, cancellationToken);
             await context.SaveChangesAsync(cancellationToken);
@@ -42,7 +43,7 @@ public class TableCmdRepo<Tb>(
         }
     }
 
-    public virtual async Task<(bool success, IEnumerable<int> newIds)> AddAsync(IEnumerable<Tb> entities, CancellationToken cancellationToken = default)
+    public virtual async Task<(bool success, IEnumerable<Guid> newIds)> AddAsync(IEnumerable<Tb> entities, CancellationToken cancellationToken = default)
     {
         const string methodName = nameof(AddAsync);
 
@@ -54,7 +55,7 @@ public class TableCmdRepo<Tb>(
 
         if (!entities.Any())
         {
-            return (true, Enumerable.Empty<int>());
+            return (true, Enumerable.Empty<Guid>());
         }
 
         try
@@ -64,7 +65,7 @@ public class TableCmdRepo<Tb>(
 
             foreach (var entity in entityList)
             {
-                entity.Id = 0;
+                entity.Id = new Guid();
                 entity.CreatedAt = utcNow;
             }
 
@@ -178,7 +179,7 @@ public class TableCmdRepo<Tb>(
 
     #region Change Status Methods
 
-    public virtual async Task<bool> ChangeStatusAsync(int id, int userId, enCurrentState status, CancellationToken cancellationToken = default)
+    public virtual async Task<bool> ChangeStatusAsync(Guid id, Guid userId, enCurrentState status, CancellationToken cancellationToken = default)
     {
         const string methodName = nameof(ChangeStatusAsync);
 
@@ -205,7 +206,7 @@ public class TableCmdRepo<Tb>(
         }
     }
 
-    public virtual async Task<bool> ChangeStatusAsync(IEnumerable<int> ids, int userId, enCurrentState status = enCurrentState.Active, CancellationToken cancellationToken = default)
+    public virtual async Task<bool> ChangeStatusAsync(IEnumerable<Guid> ids, Guid userId, enCurrentState status = enCurrentState.Active, CancellationToken cancellationToken = default)
     {
         const string methodName = nameof(ChangeStatusAsync);
 
@@ -263,11 +264,11 @@ public class TableCmdRepo<Tb>(
 
     #region Hard Delete Methods
 
-    public virtual async Task<bool> HardDeleteAsync(int id, CancellationToken cancellationToken = default)
+    public virtual async Task<bool> HardDeleteAsync(Guid id, CancellationToken cancellationToken = default)
     {
         const string methodName = nameof(HardDeleteAsync);
 
-        if (id <= 0)
+        if (id != new Guid())
         {
             logger.LogWarning(methodName, "Entity ID must be greater than zero");
             throw new ArgumentException("Invalid entity ID", nameof(id));
@@ -298,7 +299,7 @@ public class TableCmdRepo<Tb>(
         }
     }
 
-    public virtual async Task<bool> HardDeleteAsync(IEnumerable<int> ids, CancellationToken cancellationToken = default)
+    public virtual async Task<bool> HardDeleteAsync(IEnumerable<Guid> ids, CancellationToken cancellationToken = default)
     {
         const string methodName = nameof(HardDeleteAsync);
 
@@ -308,7 +309,7 @@ public class TableCmdRepo<Tb>(
             throw new ArgumentNullException(nameof(ids));
         }
 
-        var idList = ids.Where(id => id > 0).Distinct().ToList();
+        var idList = ids.Where(id => id != new Guid()).Distinct().ToList();
         if (!idList.Any())
         {
             logger.LogWarning(methodName, "No valid IDs provided for deletion");
@@ -345,12 +346,12 @@ public class TableCmdRepo<Tb>(
 
     #region Soft Delete Methods
 
-    public virtual async Task<bool> SoftDeleteAsync(int id, int userId, CancellationToken cancellationToken = default)
+    public virtual async Task<bool> SoftDeleteAsync(Guid id, Guid userId, CancellationToken cancellationToken = default)
     {
         return await ChangeStatusAsync(id, userId, enCurrentState.Deleted, cancellationToken);
     }
 
-    public virtual async Task<bool> SoftDeleteAsync(IEnumerable<int> ids, int userId, CancellationToken cancellationToken = default) => await ChangeStatusAsync(ids, userId, enCurrentState.Deleted, cancellationToken);
+    public virtual async Task<bool> SoftDeleteAsync(IEnumerable<Guid> ids, Guid userId, CancellationToken cancellationToken = default) => await ChangeStatusAsync(ids, userId, enCurrentState.Deleted, cancellationToken);
 
     #endregion
 

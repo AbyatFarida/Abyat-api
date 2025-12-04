@@ -5,7 +5,7 @@ using Abyat.Da.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 
-namespace Abyat.Api.Services.General;
+namespace Abyat.Api.Services;
 
 public class ContextConfig
 {
@@ -38,11 +38,13 @@ public class ContextConfig
         {
             adminUser = new AppUser
             {
+                Id = Guid.NewGuid(),
                 UserName = seedAdminEmail,
                 Email = seedAdminEmail,
                 EmailConfirmed = true,
                 FirstName = "admin",
                 LastName = "admin",
+                PhoneNumber = "01011000",
                 SecurityStamp = Guid.NewGuid().ToString()
             };
 

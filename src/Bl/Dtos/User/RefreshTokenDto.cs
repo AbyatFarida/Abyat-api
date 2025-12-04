@@ -32,7 +32,7 @@ namespace Abyat.Bl.Dtos.User
         /// </value>
         /// <example>12345678-1234-1234-1234-123456789abc</example>
         [Required(ErrorMessage = "User ID is required.")]
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
 
         /// <summary>
         /// Gets or sets the expiration date and time of the refresh token.
@@ -46,7 +46,7 @@ namespace Abyat.Bl.Dtos.User
         [Required(ErrorMessage = "Expiration date is required.")]
         [DataType(DataType.DateTime, ErrorMessage = "Please enter a valid datetime.")]
         [FutureDate(ErrorMessage = "Expiration date must be in the future.")]
-        public DateTime Expires { get; set; }
+        public DateTimeOffset Expires { get; set; }
     }
 }
 

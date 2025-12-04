@@ -7,9 +7,9 @@ public interface ITableQryRepo<Tb> where Tb : BaseTable
 {
     Task<List<Tb>> GetAllAsync(CancellationToken cancellationToken = default);
 
-    Task<Tb> FindAsync(int id, CancellationToken cancellationToken = default);
+    Task<Tb> FindAsync(Guid id, CancellationToken cancellationToken = default);
 
-    Task<IEnumerable<Tb>> FindAsync(IEnumerable<int> ids, CancellationToken cancellationToken = default);
+    Task<IEnumerable<Tb>> FindAsync(IEnumerable<Guid> ids, CancellationToken cancellationToken = default);
 
     Task<IEnumerable<Tb>> FindAsync(Expression<Func<Tb, bool>> filter, CancellationToken cancellationToken = default);
 
@@ -38,6 +38,6 @@ public interface ITableQryRepo<Tb> where Tb : BaseTable
 
     Task<bool> IsExistsAsync(Expression<Func<Tb, bool>> filter, CancellationToken cancellationToken = default);
 
-    Task<bool> IsExistsAsync(int Id, CancellationToken cancellationToken = default);
+    Task<bool> IsExistsAsync(Guid id, CancellationToken cancellationToken = default);
 
 }

@@ -21,7 +21,7 @@ public interface IBaseService<Tb, Dto>
     /// </summary>
     /// <param name="id">The int identifier of the entity</param>
     /// <returns>Task representing the asynchronous operation with the matching DTO</returns>
-    Task<Dto> GetByIdAsync(int id);
+    Task<Dto> GetByIdAsync(Guid id);
 
     /// <summary>
     /// Adds a new entity based on the provided DTO
@@ -32,7 +32,7 @@ public interface IBaseService<Tb, Dto>
     /// success - indicates if the operation succeeded
     /// id - the int of the newly created entity (valid when success is true)
     /// </returns>
-    Task<(bool success, int id)> AddAsync(Dto entity, bool fireEvent = true);
+    Task<(bool success, Guid id)> AddAsync(Dto entity, bool fireEvent = true);
 
     /// <summary>
     /// Updates an existing entity based on the provided DTO
@@ -51,15 +51,15 @@ public interface IBaseService<Tb, Dto>
     /// <returns>
     /// Task representing the asynchronous operation with a boolean indicating success
     /// </returns>
-    Task<bool> ActivateAsync(int id, bool fireEvent = true);
+    Task<bool> ActivateAsync(Guid id, bool fireEvent = true);
 
-    Task<bool> DeactivateAsync(int id, bool fireEvent = true);
+    Task<bool> DeactivateAsync(Guid id, bool fireEvent = true);
 
     Task<int> CountAsync(CancellationToken cancellationToken = default);
 
     Task<bool> IsExistsAsync(Expression<Func<Tb, bool>> filter, CancellationToken cancellationToken = default);
 
-    Task<bool> IsExistsAsync(int Id, CancellationToken cancellationToken = default);
+    Task<bool> IsExistsAsync(Guid id, CancellationToken cancellationToken = default);
 
-    Task<bool> DeleteAsync(int id, ServicesEnums.enDeleteType deleteType = ServicesEnums.enDeleteType.HardDelete, bool fireEvent = true);
+    Task<bool> DeleteAsync(Guid id, ServicesEnums.enDeleteType deleteType = ServicesEnums.enDeleteType.HardDelete, bool fireEvent = true);
 }

@@ -5,15 +5,15 @@ namespace Abyat.Bl.Contracts.User;
 
 public interface IUserQry
 {
-    Task<UserDto> GetByIdAsync(int userId);
+    Task<UserDto> GetByIdAsync(Guid userId);
 
     Task<UserDto> GetByEmailAsync(string email);
 
-    int GetLoggedInUserId();
+    Guid GetLoggedInUserId();
 
-    Task<IEnumerable<string>> GetUserRolesAsync(int userId);
+    Task<IEnumerable<string>> GetUserRolesAsync(Guid userId);
 
-    Task<(Claim[] claims, UserDto user)> GetClaims(int userId);
+    Task<(Claim[] claims, UserDto user)> GetClaims(Guid userId);
 
     Task<(Claim[] claims, UserDto user)> GetClaims(string email);
 

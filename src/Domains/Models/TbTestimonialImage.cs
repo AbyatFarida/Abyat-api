@@ -2,9 +2,9 @@
 
 public class TbTestimonialImage : BaseTable
 {
-    public int TestimonialId { get; set; }
+    public Guid TestimonialId { get; set; }
 
-    public int ImageSizeId { get; set; }
+    public Guid ImageSizeId { get; set; }
 
     #region Navigation Properties
 

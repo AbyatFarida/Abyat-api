@@ -21,6 +21,6 @@ public class SliderDto : BaseDto
 
     public int Order { get; set; }
 
-    public int? ImageSizeId { get; set; }
+    public Guid? ImageSizeId { get; set; }
 
 }

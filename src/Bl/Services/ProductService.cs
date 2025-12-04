@@ -20,13 +20,13 @@ public class ProductService(
     : BaseService<TbProduct, ProductDto>(repoQuery, repoCommand, mapper, userServiceQuery, publisher),
     IProduct
 {
-    public async Task<(bool success, int id)> AddAsync(ProductDto entity, IEnumerable<int> imageSizeIds, bool fireEvent)
+    public async Task<(bool success, Guid id)> AddAsync(ProductDto entity, IEnumerable<Guid> imageSizeIds, bool fireEvent)
     {
         var add = await base.AddAsync(entity, fireEvent);
 
         if (imageSizeIds.Any())
         {
-            foreach (int id in imageSizeIds)
+            foreach (var id in imageSizeIds)
             {
                 if (await productImage.IsExistsAsync(p => p.ProductId == add.id && p.ImageSizeId == id))
                     continue;
@@ -42,7 +42,7 @@ public class ProductService(
         return (add.success, add.id);
     }
 
-    public async Task<ImageDto>? GetFirstMedImg(int id)
+    public async Task<ImageDto>? GetFirstMedImg(Guid id)
     {
         if (!await HasImgs(id))
             return null;
@@ -55,15 +55,15 @@ public class ProductService(
             return images.FirstOrDefault().MediumSize;
     }
 
-    public async Task<bool> HasImgs(int id) => await productImage.IsExistsAsync(p => p.ProductId == id);
+    public async Task<bool> HasImgs(Guid id) => await productImage.IsExistsAsync(p => p.ProductId == id);
 
-    public async Task<bool> UpdateAsync(ProductDto entity, IEnumerable<int> imageSizeIds, bool fireEvent)
+    public async Task<bool> UpdateAsync(ProductDto entity, IEnumerable<Guid> imageSizeIds, bool fireEvent)
     {
         var add = await base.UpdateAsync(entity, fireEvent);
 
         if (imageSizeIds.Any())
         {
-            foreach (int id in imageSizeIds)
+            foreach (var id in imageSizeIds)
             {
                 if (await productImage.IsExistsAsync(p => p.ProductId == entity.Id && p.ImageSizeId == id))
                     continue;
@@ -79,7 +79,7 @@ public class ProductService(
         return add;
     }
 
-    public async Task<List<ImageSizeDto>> GetImgsAsync(int Id)
+    public async Task<List<ImageSizeDto>> GetImgsAsync(Guid Id)
     {
         return await productImage.GetProductImgsAsync(Id);
     }

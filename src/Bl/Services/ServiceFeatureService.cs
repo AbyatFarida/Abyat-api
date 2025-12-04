@@ -19,7 +19,7 @@ public class ServiceFeatureService(
     : BaseService<TbServiceFeature, ServiceFeatureDto>(repoQuery, repoCommand, mapper, userServiceQuery, publisher),
     IServiceFeature
 {
-    public async Task<List<ServiceFeatureDto>> GetByServiceIdAsync(int serviceId)
+    public async Task<List<ServiceFeatureDto>> GetByServiceIdAsync(Guid serviceId)
     {
         var lstFeatures = await repoQuery.FindAsync(x => x.ServiceId == serviceId && x.CurrentState == Status.enCurrentState.Active);
 

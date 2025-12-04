@@ -6,7 +6,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 
-namespace Abyat.Api.Services.General;
+namespace Abyat.Api.Services;
 
 public class UserQryService(
     IMapper mapper,
@@ -14,7 +14,7 @@ public class UserQryService(
     IHttpContextAccessor httpContextAccessor)
     : IUserQry
 {
-    public async Task<UserDto?> GetByIdAsync(int userId)
+    public async Task<UserDto?> GetByIdAsync(Guid userId)
     {
         AppUser? user = await userManager.FindByIdAsync(userId.ToString());
         return user == null ? null : mapper.Map<UserDto>(user);
@@ -26,7 +26,7 @@ public class UserQryService(
         return user == null ? null : mapper.Map<UserDto>(user);
     }
 
-    public int GetLoggedInUserId() => int.TryParse(httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier), out int res) ? res : -1;
+    public Guid GetLoggedInUserId() => Guid.TryParse(httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier), out Guid res) ? res : new Guid();
 
     #region Helpers
 
@@ -56,7 +56,7 @@ public class UserQryService(
 
     #endregion
 
-    public async Task<IEnumerable<string>> GetUserRolesAsync(int userId)
+    public async Task<IEnumerable<string>> GetUserRolesAsync(Guid userId)
     {
         var user = await userManager.FindByIdAsync(userId.ToString());
 
@@ -74,7 +74,7 @@ public class UserQryService(
         return await BuildUserClaims(user);
     }
 
-    public async Task<(Claim[] claims, UserDto user)> GetClaims(int userId)
+    public async Task<(Claim[] claims, UserDto user)> GetClaims(Guid userId)
     {
         var user = await GetByIdAsync(userId);
         return await BuildUserClaims(user);

@@ -19,7 +19,7 @@ public class ServiceProductService(
     : BaseService<TbServiceProduct, ServiceProductDto>(repoQuery, repoCommand, mapper, userServiceQuery, publisher),
     IServiceProduct
 {
-    public async Task<List<ServiceProductDto>> GetByServiceIdAsync(int serviceId)
+    public async Task<List<ServiceProductDto>> GetByServiceIdAsync(Guid serviceId)
     {
         var lstProduct = await repoQuery.FindAsync(x => x.ServiceId == serviceId && x.CurrentState == Status.enCurrentState.Active);
         return mapper.Map<List<ServiceProductDto>>(lstProduct);

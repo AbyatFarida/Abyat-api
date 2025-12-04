@@ -8,14 +8,13 @@ using Utils.Format;
 
 namespace Abyat.Da.Context;
 
-public partial class AbyatDbContext : IdentityDbContext<AppUser, AppRole, int>
+public partial class AbyatDbContext : IdentityDbContext<AppUser, AppRole, Guid>
 {
     public AbyatDbContext(DbContextOptions<AbyatDbContext> options) : base(options) { }
 
     protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
     {
-        configurationBuilder.Properties<string>().HaveMaxLength(100);
-        configurationBuilder.Properties<DateTime>().HaveColumnType("datetime2");
+        configurationBuilder.Properties<string>().HaveMaxLength(500);
     }
 
     protected override void OnModelCreating(ModelBuilder builder)
@@ -37,15 +36,13 @@ public partial class AbyatDbContext : IdentityDbContext<AppUser, AppRole, int>
                 entity.HasKey(nameof(BaseTable.Id));
 
                 entity.Property(nameof(BaseTable.Id))
-                    .ValueGeneratedOnAdd()
-                    .UseIdentityColumn();
+                    .ValueGeneratedOnAdd();
 
                 entity.Property(nameof(BaseTable.CreatedAt))
                     .IsRequired();
                 entity.Property(nameof(BaseTable.UpdatedAt));
                 entity.Property(nameof(BaseTable.CurrentState))
-                    .IsRequired()
-                    .HasDefaultValue(1);
+                    .IsRequired();
 
                 entity.HasOne(typeof(AppUser))
                     .WithMany()

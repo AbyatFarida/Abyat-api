@@ -10,7 +10,6 @@ public class TbProduct : BaseTable
 
     public string? DescriptionAr { get; set; }
 
-
     #region Navigation Properties
 
     public virtual ICollection<TbServiceProduct> ServiceProducts { get; set; } = new List<TbServiceProduct>();

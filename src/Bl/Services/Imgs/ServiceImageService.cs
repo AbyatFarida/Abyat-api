@@ -19,7 +19,7 @@ public class ServiceImageService(
     IServiceImage
 {
 
-    public async Task<List<ImageSizeDto>> GetServiceImgsAsync(int serviceId)
+    public async Task<List<ImageSizeDto>> GetServiceImgsAsync(Guid serviceId)
     {
         var serviceImg = await repoQuery.FindByServiceIdAsync(serviceId);
 

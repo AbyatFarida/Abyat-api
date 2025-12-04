@@ -6,7 +6,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Abyat.Api.Services.General;
+namespace Abyat.Api.Services;
 
 public class TokenService(AppSettings appSettings) : ITokenService
 {

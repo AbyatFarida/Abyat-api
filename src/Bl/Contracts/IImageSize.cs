@@ -7,6 +7,6 @@ namespace Abyat.Bl.Contracts;
 
 public interface IImageSize : IBaseService<TbImageSize, ImageSizeDto>
 {
-    Task<List<ImageSizeDto>> FindByImageIdAsync(int imageId, CancellationToken cancellationToken = default);
+    Task<List<ImageSizeDto>> FindByImageIdAsync(Guid imageId, CancellationToken cancellationToken = default);
 
 }

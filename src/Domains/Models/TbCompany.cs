@@ -18,7 +18,7 @@ public class TbCompany : BaseTable
 
     public string? Email { get; set; }
 
-    public int? LogoId { get; set; }
+    public Guid? LogoId { get; set; }
 
 
     #region Navigation Properties

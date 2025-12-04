@@ -2,7 +2,7 @@
 
 public class TestimonialDetailedDto
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
 
     public string TxtEn { get; set; } = null!;
 

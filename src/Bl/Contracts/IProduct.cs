@@ -6,7 +6,7 @@ namespace Abyat.Bl.Contracts;
 
 public interface IProduct : IBaseService<TbProduct, ProductDto>, IServiceImgs
 {
-    Task<(bool success, int id)> AddAsync(ProductDto entity, IEnumerable<int> imageSizeIds, bool fireEvent = true);
+    Task<(bool success, Guid id)> AddAsync(ProductDto entity, IEnumerable<Guid> imageSizeIds, bool fireEvent = true);
 
-    Task<bool> UpdateAsync(ProductDto entity, IEnumerable<int> imageSizeIds, bool fireEvent = true);
+    Task<bool> UpdateAsync(ProductDto entity, IEnumerable<Guid> imageSizeIds, bool fireEvent = true);
 }

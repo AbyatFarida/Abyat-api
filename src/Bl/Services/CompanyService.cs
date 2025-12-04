@@ -29,9 +29,9 @@ public class CompanyService(
         return mapper.Map<CompanyDto>(company);
     }
 
-    public override async Task<bool> DeleteAsync(int id, enDeleteType deleteType = enDeleteType.HardDelete, bool fireEvent = true)
+    public override async Task<bool> DeleteAsync(Guid id, enDeleteType deleteType = enDeleteType.HardDelete, bool fireEvent = true)
     {
-        if (id == 1 || await client.IsExistsAsync(c => c.CompanyId == id))
+        if (await client.IsExistsAsync(c => c.CompanyId == id))
         {
             return false;
         }

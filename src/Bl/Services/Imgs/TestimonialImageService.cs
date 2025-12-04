@@ -19,7 +19,7 @@ public class TestimonialImageService(
     ITestimonialImage
 {
 
-    public async Task<List<ImageSizeDto>> GetTestimonialImgsAsync(int TestimonialId)
+    public async Task<List<ImageSizeDto>> GetTestimonialImgsAsync(Guid TestimonialId)
     {
         var TestimonialImg = await repoQuery.FindByTestimonialIdAsync(TestimonialId);
 

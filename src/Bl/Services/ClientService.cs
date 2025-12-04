@@ -30,7 +30,7 @@ public class ClientService(
         return mapper.Map<ClientDto>(client);
     }
 
-    public override async Task<bool> DeleteAsync(int id, enDeleteType deleteType = enDeleteType.HardDelete, bool fireEvent = true)
+    public override async Task<bool> DeleteAsync(Guid id, enDeleteType deleteType = enDeleteType.HardDelete, bool fireEvent = true)
     {
         if (await project.IsExistsAsync(p => p.ClientId == id) ||
             await testimonial.IsExistsAsync(t => t.ClientId == id))

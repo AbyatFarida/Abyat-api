@@ -6,5 +6,5 @@ namespace Abyat.Bl.Contracts;
 
 public interface ITestimonialImage : IBaseService<TbTestimonialImage, TestimonialImageDto>
 {
-    Task<List<ImageSizeDto>> GetTestimonialImgsAsync(int testimonialId);
+    Task<List<ImageSizeDto>> GetTestimonialImgsAsync(Guid testimonialId);
 }

@@ -15,7 +15,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Serilog;
 
-namespace Abyat.Api.Services.General;
+namespace Abyat.Api.Services;
 
 public static class RegisterHelper
 {
@@ -36,7 +36,7 @@ public static class RegisterHelper
 
         string? connStr = builder.Configuration.GetConnectionString("DefaultConnection");
 
-        builder.Services.AddDbContextFactory<AbyatDbContext>(options =>
+        builder.Services.AddDbContext<AbyatDbContext>(options =>
         {
             options.UseSqlServer(connStr);
         });

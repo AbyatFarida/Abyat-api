@@ -18,7 +18,7 @@ public class TbSlider : BaseTable
 
     public int Order { get; set; }
 
-    public int? ImageSizeId { get; set; }
+    public Guid? ImageSizeId { get; set; }
 
 
     #region Navigation Properties

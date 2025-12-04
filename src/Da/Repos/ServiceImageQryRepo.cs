@@ -15,7 +15,7 @@ public class ServiceImageQryRepo(
     : TableQryRepoWithFactory<TbServiceImage>(contextFactory, logger),
     IServiceImageQryRepo
 {
-    public async Task<List<TbServiceImage>> FindByServiceIdAsync(int serviceId, CancellationToken cancellationToken)
+    public async Task<List<TbServiceImage>> FindByServiceIdAsync(Guid serviceId, CancellationToken cancellationToken)
     {
         try
         {

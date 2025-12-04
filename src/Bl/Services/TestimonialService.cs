@@ -23,13 +23,13 @@ public class TestimonialService(
     : BaseService<TbTestimonial, TestimonialDto>(repoQuery, repoCommand, mapper, userServiceQuery, publisher),
     ITestimonial
 {
-    public async Task<(bool success, int id)> AddAsync(TestimonialDto entity, IEnumerable<int> imageSizeIds, bool fireEvent = true)
+    public async Task<(bool success, Guid id)> AddAsync(TestimonialDto entity, IEnumerable<Guid> imageSizeIds, bool fireEvent = true)
     {
         var add = await base.AddAsync(entity, fireEvent);
 
         if (imageSizeIds.Any())
         {
-            foreach (int id in imageSizeIds)
+            foreach (var id in imageSizeIds)
             {
                 if (await testimonialImage.IsExistsAsync(p => p.TestimonialId == add.id && p.ImageSizeId == id))
                     continue;
@@ -45,7 +45,7 @@ public class TestimonialService(
         return (add.success, add.id);
     }
 
-    public async Task<ImageDto>? GetFirstMedImg(int id)
+    public async Task<ImageDto>? GetFirstMedImg(Guid id)
     {
         if (!await HasImgs(id))
             return null;
@@ -58,15 +58,15 @@ public class TestimonialService(
             return images.FirstOrDefault().MediumSize;
     }
 
-    public async Task<bool> HasImgs(int id) => await testimonialImage.IsExistsAsync(p => p.TestimonialId == id);
+    public async Task<bool> HasImgs(Guid id) => await testimonialImage.IsExistsAsync(p => p.TestimonialId == id);
 
-    public async Task<bool> UpdateAsync(TestimonialDto entity, IEnumerable<int> imageSizeIds, bool fireEvent = true)
+    public async Task<bool> UpdateAsync(TestimonialDto entity, IEnumerable<Guid> imageSizeIds, bool fireEvent = true)
     {
         var add = await base.UpdateAsync(entity, fireEvent);
 
         if (imageSizeIds.Any())
         {
-            foreach (int id in imageSizeIds)
+            foreach (var id in imageSizeIds)
             {
                 if (await testimonialImage.IsExistsAsync(p => p.TestimonialId == entity.Id && p.ImageSizeId == id))
                     continue;
@@ -82,7 +82,7 @@ public class TestimonialService(
         return add;
     }
 
-    public async Task<List<ImageSizeDto>> GetImgsAsync(int Id)
+    public async Task<List<ImageSizeDto>> GetImgsAsync(Guid Id)
     {
         return await testimonialImage.GetTestimonialImgsAsync(Id);
     }

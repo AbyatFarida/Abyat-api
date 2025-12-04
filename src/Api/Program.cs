@@ -1,5 +1,5 @@
 using Abyat.Api.Middlewares;
-using Abyat.Api.Services.General;
+using Abyat.Api.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;

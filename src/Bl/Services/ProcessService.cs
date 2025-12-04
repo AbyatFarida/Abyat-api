@@ -28,7 +28,7 @@ public class ProcessService(
         return mapper.Map<ProcessDto>(lstProcess.FirstOrDefault());
     }
 
-    public override async Task<bool> DeleteAsync(int id, enDeleteType deleteType = enDeleteType.HardDelete, bool fireEvent = true)
+    public override async Task<bool> DeleteAsync(Guid id, enDeleteType deleteType = enDeleteType.HardDelete, bool fireEvent = true)
     {
         if (await service.IsExistsAsync(s => s.ProcessId == id) ||
             await processStep.IsExistsAsync(s => s.ProcessId == id))

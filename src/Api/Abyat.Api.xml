@@ -4,11 +4,6 @@
         <name>Abyat.Api</name>
     </assembly>
     <members>
-        <member name="T:Abyat.Api.Constants.StripeEventTypes">
-            <summary>
-            Stripe event type constants.
-            </summary>
-        </member>
         <member name="T:Abyat.Api.Controllers.Auth.AuthController">
             <summary>
             Provides authentication and authorization endpoints including

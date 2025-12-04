@@ -2,9 +2,9 @@
 
 public class TbImageSize : BaseTable
 {
-    public int? SmallSizeId { get; set; }
-    public int MediumSizeId { get; set; }
-    public int? LargeSizeId { get; set; }
+    public Guid? SmallSizeId { get; set; }
+    public Guid MediumSizeId { get; set; }
+    public Guid? LargeSizeId { get; set; }
 
     #region Navigation Props
 

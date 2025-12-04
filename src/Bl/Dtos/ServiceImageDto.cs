@@ -4,8 +4,8 @@ namespace Abyat.Bl.Dtos;
 
 public class ServiceImageDto : BaseDto
 {
-    public int ServiceId { get; set; }
+    public Guid ServiceId { get; set; }
 
-    public int ImageSizeId { get; set; }
+    public Guid ImageSizeId { get; set; }
 
 }

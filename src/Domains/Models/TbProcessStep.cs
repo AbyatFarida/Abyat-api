@@ -12,7 +12,7 @@ public class TbProcessStep : BaseTable
 
     public int Order { get; set; }
 
-    public int ProcessId { get; set; }
+    public Guid ProcessId { get; set; }
 
     public virtual TbProcess Process { get; set; } = null!;
 

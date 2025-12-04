@@ -2,7 +2,7 @@
 
 public class ProjectDetailedDto
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
 
     public string TitleEn { get; set; } = null!;
 

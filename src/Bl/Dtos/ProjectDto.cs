@@ -16,6 +16,6 @@ public class ProjectDto : BaseDto
 
     public int Order { get; set; }
 
-    public int? ClientId { get; set; }
+    public Guid? ClientId { get; set; }
 
 }

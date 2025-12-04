@@ -10,7 +10,7 @@ public class AbyatDbContextFactory : IDesignTimeDbContextFactory<AbyatDbContext>
     {
         var configuration = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json", optional: false)
+            .AddJsonFile("appsettings.Development.json", optional: false)
             .Build();
 
         DbContextOptionsBuilder<AbyatDbContext>? optionsBuilder = new DbContextOptionsBuilder<AbyatDbContext>();

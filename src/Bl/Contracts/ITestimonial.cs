@@ -8,7 +8,7 @@ namespace Abyat.Bl.Contracts;
 
 public interface ITestimonial : IBaseService<TbTestimonial, TestimonialDto>, IServiceImgs
 {
-    Task<(bool success, int id)> AddAsync(TestimonialDto entity, IEnumerable<int> imageSizeIds, bool fireEvent = true);
+    Task<(bool success, Guid id)> AddAsync(TestimonialDto entity, IEnumerable<Guid> imageSizeIds, bool fireEvent = true);
     Task<PagedResult<TestimonialDetailedDto>> GetPagedList(int pageNumber = 1, int pageSize = 50);
-    Task<bool> UpdateAsync(TestimonialDto entity, IEnumerable<int> imageSizeIds, bool fireEvent = true);
+    Task<bool> UpdateAsync(TestimonialDto entity, IEnumerable<Guid> imageSizeIds, bool fireEvent = true);
 }

@@ -17,7 +17,7 @@ public class TableQryRepoWithFactory<Tb>(
     ITableQryRepo<Tb>
     where Tb : BaseTable
 {
-    public virtual async Task<Tb> FindAsync(int id, CancellationToken cancellationToken = default)
+    public virtual async Task<Tb> FindAsync(Guid id, CancellationToken cancellationToken = default)
     {
         try
         {
@@ -37,7 +37,7 @@ public class TableQryRepoWithFactory<Tb>(
         }
     }
 
-    public virtual async Task<IEnumerable<Tb>> FindAsync(IEnumerable<int> ids, CancellationToken cancellationToken = default)
+    public virtual async Task<IEnumerable<Tb>> FindAsync(IEnumerable<Guid> ids, CancellationToken cancellationToken = default)
     {
         if (ids == null)
         {
@@ -271,6 +271,6 @@ public class TableQryRepoWithFactory<Tb>(
         }
     }
 
-    public virtual async Task<bool> IsExistsAsync(int Id, CancellationToken cancellationToken = default) => await IsExistsAsync(x => x.Id == Id && x.CurrentState > 0, cancellationToken);
+    public virtual async Task<bool> IsExistsAsync(Guid Id, CancellationToken cancellationToken = default) => await IsExistsAsync(x => x.Id == Id && x.CurrentState > 0, cancellationToken);
 
 }

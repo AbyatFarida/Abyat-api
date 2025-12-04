@@ -4,6 +4,6 @@ namespace Abyat.Domains.Contracts;
 
 public interface IProductImageQryRepo : ITableQryRepo<TbProductImage>
 {
-    Task<List<TbProductImage>> FindByProductIdAsync(int productId, CancellationToken cancellationToken = default);
+    Task<List<TbProductImage>> FindByProductIdAsync(Guid productId, CancellationToken cancellationToken = default);
 
 }

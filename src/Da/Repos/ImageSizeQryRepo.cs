@@ -15,7 +15,7 @@ public class ImageSizeQryRepo(
     : TableQryRepoWithFactory<TbImageSize>(contextFactory, logger),
     IImageSizeQryRepo
 {
-    public async Task<List<TbImageSize>> FindByImageIdAsync(int imageId, CancellationToken cancellationToken)
+    public async Task<List<TbImageSize>> FindByImageIdAsync(Guid imageId, CancellationToken cancellationToken)
     {
         try
         {
@@ -40,7 +40,7 @@ public class ImageSizeQryRepo(
         }
     }
 
-    public override async Task<TbImageSize> FindAsync(int id, CancellationToken cancellationToken = default)
+    public override async Task<TbImageSize> FindAsync(Guid id, CancellationToken cancellationToken = default)
     {
         try
         {

@@ -4,9 +4,9 @@ namespace Abyat.Bl.Contracts;
 
 public interface IServiceImgs
 {
-    Task<ImageDto>? GetFirstMedImg(int id);
+    Task<ImageDto>? GetFirstMedImg(Guid id);
 
-    Task<List<ImageSizeDto>> GetImgsAsync(int Id);
+    Task<List<ImageSizeDto>> GetImgsAsync(Guid Id);
 
-    Task<bool> HasImgs(int id);
+    Task<bool> HasImgs(Guid id);
 }

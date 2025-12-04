@@ -6,5 +6,5 @@ namespace Abyat.Bl.Contracts;
 
 public interface IProductImage : IBaseService<TbProductImage, ProductImageDto>
 {
-    Task<List<ImageSizeDto>> GetProductImgsAsync(int productId);
+    Task<List<ImageSizeDto>> GetProductImgsAsync(Guid productId);
 }

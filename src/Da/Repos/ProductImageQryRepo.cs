@@ -15,7 +15,7 @@ public class ProductImageQryRepo(
     : TableQryRepoWithFactory<TbProductImage>(contextFactory, logger),
     IProductImageQryRepo
 {
-    public async Task<List<TbProductImage>> FindByProductIdAsync(int productId, CancellationToken cancellationToken)
+    public async Task<List<TbProductImage>> FindByProductIdAsync(Guid productId, CancellationToken cancellationToken)
     {
         try
         {

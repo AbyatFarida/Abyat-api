@@ -14,6 +14,6 @@ public class ProcessStepDto : BaseDto
 
     public int Order { get; set; }
 
-    public int ProcessId { get; set; }
+    public Guid ProcessId { get; set; }
 
 }

@@ -19,7 +19,7 @@ public class ProductImageService(
     IProductImage
 {
 
-    public async Task<List<ImageSizeDto>> GetProductImgsAsync(int productId)
+    public async Task<List<ImageSizeDto>> GetProductImgsAsync(Guid productId)
     {
         var productImg = await repoQuery.FindByProductIdAsync(productId);
 

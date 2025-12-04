@@ -10,7 +10,7 @@ public class UserDto
     /// Gets or sets the unique identifier for the entity.
     /// </summary>
     /// <example>"3fa85f64-5717-4562-b3fc-2c963f66afa6"</example>
-    public int Id { get; set; }
+    public Guid Id { get; set; }
 
     [Required(ErrorMessageResourceType = typeof(ResMessages), ErrorMessageResourceName = "EmailRequired")]
     [EmailAddress(ErrorMessageResourceType = typeof(ResMessages), ErrorMessageResourceName = "InvalidEmail")]

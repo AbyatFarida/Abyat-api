@@ -26,7 +26,7 @@ public class ServiceCategoryService(
         return mapper.Map<ServiceCategoryDto>(await repoQuery.GetFirstOrDefaultAsync(filter: (e => e.TitleEn == title)));
     }
 
-    public override async Task<bool> DeleteAsync(int id, enDeleteType deleteType = enDeleteType.HardDelete, bool fireEvent = true)
+    public override async Task<bool> DeleteAsync(Guid id, enDeleteType deleteType = enDeleteType.HardDelete, bool fireEvent = true)
     {
         if (await service.IsExistsAsync(s => s.ServiceCategoryId == id))
         {

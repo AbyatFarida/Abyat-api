@@ -23,19 +23,19 @@ public class ImageSizeService(
     : BaseService<TbImageSize, ImageSizeDto>(repoQuery, repoCommand, mapper, userServiceQuery, publisher),
     IImageSize
 {
-    public async Task<List<ImageSizeDto>> FindByImageIdAsync(int imageId, CancellationToken cancellationToken = default)
+    public async Task<List<ImageSizeDto>> FindByImageIdAsync(Guid imageId, CancellationToken cancellationToken = default)
     {
         var imgs = await repoQuery.FindByImageIdAsync(imageId, cancellationToken);
         return mapper.Map<List<ImageSizeDto>>(imgs);
     }
 
-    public override async Task<ImageSizeDto> GetByIdAsync(int id)
+    public override async Task<ImageSizeDto> GetByIdAsync(Guid id)
     {
         var imgs = await repoQuery.FindAsync(id, default);
         return mapper.Map<ImageSizeDto>(imgs);
     }
 
-    public override async Task<bool> DeleteAsync(int id, enDeleteType deleteType = enDeleteType.HardDelete, bool fireEvent = true)
+    public override async Task<bool> DeleteAsync(Guid id, enDeleteType deleteType = enDeleteType.HardDelete, bool fireEvent = true)
     {
         bool success = true;
 

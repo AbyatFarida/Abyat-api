@@ -6,5 +6,5 @@ namespace Abyat.Bl.Contracts;
 
 public interface IServiceFeature : IBaseService<TbServiceFeature, ServiceFeatureDto>
 {
-    Task<List<ServiceFeatureDto>> GetByServiceIdAsync(int serviceId);
+    Task<List<ServiceFeatureDto>> GetByServiceIdAsync(Guid serviceId);
 }

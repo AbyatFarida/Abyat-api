@@ -5,9 +5,9 @@ namespace Abyat.Bl.Dtos;
 
 public class ImageSizeDto : BaseDto
 {
-    public int? SmallSizeId { get; set; } = null;
-    public int MediumSizeId { get; set; } = -1;
-    public int? LargeSizeId { get; set; } = null;
+    public Guid? SmallSizeId { get; set; } = null;
+    public Guid MediumSizeId { get; set; } = new Guid();
+    public Guid? LargeSizeId { get; set; } = null;
 
     public virtual ImageDto? SmallSize { get; set; } = null!;
     public virtual ImageDto MediumSize { get; set; } = null!;

@@ -8,6 +8,6 @@ public class ClientDto : BaseDto
 
     public string NameAr { get; set; } = null!;
 
-    public int? CompanyId { get; set; }
+    public Guid? CompanyId { get; set; }
 
 }

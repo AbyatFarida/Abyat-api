@@ -19,7 +19,7 @@ public class ProjectImageService(
     IProjectImage
 {
 
-    public async Task<List<ImageSizeDto>> GetProjectImgsAsync(int projectId)
+    public async Task<List<ImageSizeDto>> GetProjectImgsAsync(Guid projectId)
     {
         var projectImg = await repoQuery.FindByProjectIdAsync(projectId);
 

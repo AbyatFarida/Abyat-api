@@ -2,9 +2,9 @@
 
 public class TbProjectImage : BaseTable
 {
-    public int ProjectId { get; set; }
+    public Guid ProjectId { get; set; }
 
-    public int ImageSizeId { get; set; }
+    public Guid ImageSizeId { get; set; }
 
     #region Navigation Properties
 

@@ -8,7 +8,7 @@ public class TbTestimonial : BaseTable
 
     public int Rating { get; set; }
 
-    public int ClientId { get; set; }
+    public Guid ClientId { get; set; }
 
     #region Navigation Properties
 

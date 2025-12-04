@@ -8,18 +8,18 @@ namespace Abyat.Bl.Contracts;
 
 public interface IService : IBaseService<TbService, ServiceDto>, IServiceImgs
 {
-    Task<(bool success, int id)> AddAsync(
+    Task<(bool success, Guid id)> AddAsync(
         ServiceDto entity,
-        List<int> featuresIds,
-        List<int> productsIds,
-        IEnumerable<int>? imageSizeIds = null,
+        List<Guid> featuresIds,
+        List<Guid> productsIds,
+        IEnumerable<Guid>? imageSizeIds = null,
         bool fireEvent = true);
     Task<PagedResult<ServiceDetailedDto>> GetPagedList(int pageNumber = 1, int pageSize = 50);
     Task<bool> UpdateAsync(
         ServiceDto entity,
-        List<int> featuresIds,
-        List<int> productsIds,
-        IEnumerable<int>? imageSizeIds = null,
+        List<Guid> featuresIds,
+        List<Guid> productsIds,
+        IEnumerable<Guid>? imageSizeIds = null,
         bool fireEvent = true);
 
 }

@@ -22,8 +22,8 @@ public class ServiceDto : BaseDto
 
     public string Slug { get; set; } = null!;
 
-    public int ServiceCategoryId { get; set; }
+    public Guid ServiceCategoryId { get; set; }
 
-    public int ProcessId { get; set; }
+    public Guid ProcessId { get; set; }
 
 }

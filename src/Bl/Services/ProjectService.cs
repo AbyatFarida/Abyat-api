@@ -23,16 +23,16 @@ public class ProjectService(
     : BaseService<TbProject, ProjectDto>(repoQuery, repoCommand, mapper, userServiceQuery, publisher),
     IProject
 {
-    public async Task<(bool success, int id)> AddAsync(
+    public async Task<(bool success, Guid id)> AddAsync(
         ProjectDto entity,
-        IEnumerable<int> imageSizeIds,
+        IEnumerable<Guid> imageSizeIds,
         bool fireEvent = true)
     {
         var add = await base.AddAsync(entity, fireEvent);
 
         if (imageSizeIds.Any())
         {
-            foreach (int id in imageSizeIds)
+            foreach (var id in imageSizeIds)
             {
                 if (await projectImage.IsExistsAsync(p => p.ProjectId == add.id && p.ImageSizeId == id))
                     continue;
@@ -48,9 +48,9 @@ public class ProjectService(
         return (add.success, add.id);
     }
 
-    public async Task<bool> HasImgs(int id) => await projectImage.IsExistsAsync(p => p.ProjectId == id);
+    public async Task<bool> HasImgs(Guid id) => await projectImage.IsExistsAsync(p => p.ProjectId == id);
 
-    public async Task<ImageDto>? GetFirstMedImg(int id)
+    public async Task<ImageDto>? GetFirstMedImg(Guid id)
     {
         if (!await HasImgs(id))
             return null;
@@ -65,14 +65,14 @@ public class ProjectService(
 
     public async Task<bool> UpdateAsync(
         ProjectDto entity,
-        IEnumerable<int> imageSizeIds,
+        IEnumerable<Guid> imageSizeIds,
         bool fireEvent)
     {
         var update = await base.UpdateAsync(entity, fireEvent);
 
         if (imageSizeIds.Any())
         {
-            foreach (int imgSizeId in imageSizeIds)
+            foreach (var imgSizeId in imageSizeIds)
             {
                 if (await projectImage.IsExistsAsync(p => p.ProjectId == entity.Id && p.ImageSizeId == imgSizeId))
                     continue;
@@ -88,7 +88,7 @@ public class ProjectService(
         return update;
     }
 
-    public async Task<List<ImageSizeDto>> GetImgsAsync(int Id)
+    public async Task<List<ImageSizeDto>> GetImgsAsync(Guid Id)
     {
         return await projectImage.GetProjectImgsAsync(Id);
     }

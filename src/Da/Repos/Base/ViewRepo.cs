@@ -25,7 +25,7 @@ public class ViewRepo<Vw>(AbyatDbContext context, ILogger<ViewRepo<Vw>> logger) 
         }
     }
 
-    public async Task<Vw> GetByIdAsync(int id, CancellationToken cancellationToken = default)
+    public async Task<Vw> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
     {
         try
         {

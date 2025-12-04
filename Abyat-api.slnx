@@ -1,0 +1,13 @@
+<Solution>
+  <Folder Name="/Shared/">
+    <File Path="Directory.Packages.props" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/Api/Abyat.Api.csproj" />
+    <Project Path="src/Bl/Abyat.Bl.csproj" />
+    <Project Path="src/Core/Abyat.Core.csproj" />
+    <Project Path="src/Da/Abyat.Da.csproj" />
+    <Project Path="src/Domains/Abyat.Domains.csproj" />
+  </Folder>
+  <Project Path="../../Utilities/CS_Utilities/Utils.csproj" />
+</Solution>

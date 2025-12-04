@@ -4,6 +4,6 @@ namespace Abyat.Domains.Contracts;
 
 public interface ITestimonialImageQryRepo : ITableQryRepo<TbTestimonialImage>
 {
-    Task<List<TbTestimonialImage>> FindByTestimonialIdAsync(int testimonialId, CancellationToken cancellationToken = default);
+    Task<List<TbTestimonialImage>> FindByTestimonialIdAsync(Guid testimonialId, CancellationToken cancellationToken = default);
 
 }

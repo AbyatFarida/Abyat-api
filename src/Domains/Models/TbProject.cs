@@ -14,7 +14,7 @@ public class TbProject : BaseTable
 
     public int Order { get; set; }
 
-    public int? ClientId { get; set; }
+    public Guid? ClientId { get; set; }
 
     #region Navigation Properties
 

@@ -6,5 +6,5 @@ namespace Abyat.Bl.Contracts;
 
 public interface IServiceProduct : IBaseService<TbServiceProduct, ServiceProductDto>
 {
-    Task<List<ServiceProductDto>> GetByServiceIdAsync(int serviceId);
+    Task<List<ServiceProductDto>> GetByServiceIdAsync(Guid serviceId);
 }

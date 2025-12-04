@@ -20,6 +20,6 @@ public class CompanyDto : BaseDto
 
     public string? Email { get; set; }
 
-    public int? LogoId { get; set; }
+    public Guid? LogoId { get; set; }
 
 }

@@ -6,7 +6,7 @@ public class EntityUpdatedEventArgs : CrudEventArgs
 {
     public BaseTable OriginalEntity { get; }
 
-    public EntityUpdatedEventArgs(BaseTable entity, int userId, BaseTable originalEntity) : base(entity, userId)
+    public EntityUpdatedEventArgs(BaseTable entity, Guid userId, BaseTable originalEntity) : base(entity, userId)
     {
         Operation = enCrudOp.Update;
         OriginalEntity = originalEntity;
